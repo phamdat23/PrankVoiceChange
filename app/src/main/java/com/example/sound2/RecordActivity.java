@@ -63,6 +63,7 @@ public class RecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RecordActivity.this, MagicActivity.class);
+                intent.putExtra("id",obj.getId());
                 intent.putExtra("name",obj.getName());
                 intent.putExtra("voice",obj.getFile());
                 intent.putExtra("image",obj.getImage());
@@ -85,7 +86,7 @@ public class RecordActivity extends AppCompatActivity {
                         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/recording.mp3";
+                        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/recording"+System.currentTimeMillis() +".mp3";
                         Log.e("TAG", "onTouch:file "+outputFile );
                         recorder.setOutputFile(outputFile);
                         try {

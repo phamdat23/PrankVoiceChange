@@ -72,6 +72,12 @@ public class DetailItemVoiceActivity extends AppCompatActivity {
         if(switchLoop.isChecked()){
             playSound.loop(loop);
         }
+        imgLoudspeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 

@@ -91,6 +91,10 @@ public class PlaySound extends Service {
 
 
     }
+    public void Loudspeaker(){
+
+    }
+
 
     public void PauseMusic() {
         if (mediaPlayer != null) {

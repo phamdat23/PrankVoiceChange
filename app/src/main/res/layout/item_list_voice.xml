@@ -6,6 +6,12 @@
     android:gravity="center"
     android:layout_margin="10dp">
     <ImageView
+        android:id="@+id/img_delete"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_gravity="end"
+        />
+    <ImageView
         android:id="@+id/img_record"
         android:layout_width="88dp"
         android:layout_height="88dp"

@@ -63,6 +63,13 @@ public class AdapterVoice extends RecyclerView.Adapter<AdapterVoice.ViewHodeVoic
                 m.startActivity(intent);
             }
         });
+        Glide.with(holder.itemView).load("").into(holder.imgDelete);
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -79,12 +86,13 @@ public class AdapterVoice extends RecyclerView.Adapter<AdapterVoice.ViewHodeVoic
     public void dialog(Voice obj, int index) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Thêm mục");
-        builder.setMessage("Bạn có muốn thêm sound này vào mục favorite không ");
-        builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
+        builder.setMessage("Bạn có muốn xóa Voice này không ");
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int res = dao_voice.delete(obj);
                 if (res > 0) {
+                    list.remove(index);
                     notifyItemRemoved(index);
                     notifyDataSetChanged();
                     dialog.dismiss();
@@ -101,16 +109,21 @@ public class AdapterVoice extends RecyclerView.Adapter<AdapterVoice.ViewHodeVoic
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     public class ViewHodeVoice extends RecyclerView.ViewHolder {
         private ImageView imgRecord;
         private TextView tvName;
 
-
+        private ImageView imgDelete;
 
         public ViewHodeVoice(@NonNull View itemView) {
             super(itemView);
             imgRecord = (ImageView) itemView.findViewById(R.id.img_record);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
+
+
+            imgDelete = (ImageView) itemView.findViewById(R.id.img_delete);
+
         }
     }
 }
