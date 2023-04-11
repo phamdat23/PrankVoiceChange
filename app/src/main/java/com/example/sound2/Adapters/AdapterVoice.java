@@ -21,6 +21,7 @@ import com.example.sound2.MainActivity;
 import com.example.sound2.Models.Voice;
 import com.example.sound2.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AdapterVoice extends RecyclerView.Adapter<AdapterVoice.ViewHodeVoice> {
@@ -92,10 +93,15 @@ public class AdapterVoice extends RecyclerView.Adapter<AdapterVoice.ViewHodeVoic
             public void onClick(DialogInterface dialog, int which) {
                 int res = dao_voice.delete(obj);
                 if (res > 0) {
-                    list.remove(index);
-                    notifyItemRemoved(index);
-                    notifyDataSetChanged();
-                    dialog.dismiss();
+                    File file = new File(obj.getFile());
+                    boolean isDelete = file.delete();
+                    if(isDelete){
+                        list.remove(index);
+                        notifyItemRemoved(index);
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
                 }
 
             }

@@ -82,17 +82,23 @@ public class PlaySound extends Service {
     }
 
     public void loop(boolean a) {
-
+    if(mediaPlayer.isPlaying()){
         if (a == true) {
             mediaPlayer.setLooping(true);
         } else {
             mediaPlayer.setLooping(false);
         }
+    }
+
 
 
     }
-    public void Loudspeaker(){
-
+    public void Loudspeaker(boolean a){
+        if(a==true){
+            mediaPlayer.setVolume(100, 100);
+        }else{
+            mediaPlayer.setVolume(0, 0);
+        }
     }
 
 

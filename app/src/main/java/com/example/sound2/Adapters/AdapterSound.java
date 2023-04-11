@@ -62,7 +62,6 @@ public class AdapterSound extends RecyclerView.Adapter<AdapterSound.ViewHoderIte
                 intent.putExtra("name", objSound.getName());
                 intent.putExtra("sound", objSound.getSound());
                 intent.putExtra("image", objSound.getImage());
-                intent.putExtra("framentSound", "sound");
                 m.startActivity(intent);
             }
         });

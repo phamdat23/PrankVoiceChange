@@ -1,5 +1,6 @@
 package com.example.sound2;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class DetailItemVoiceActivity extends AppCompatActivity {
     private TextView tvTime;
     PlaySound playSound;
     boolean loop =false;
+    private ImageView imgBackHome;
     ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -38,6 +41,7 @@ public class DetailItemVoiceActivity extends AppCompatActivity {
 
         }
     };
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,17 @@ public class DetailItemVoiceActivity extends AppCompatActivity {
         imgLoudspeaker = (ImageView) findViewById(R.id.img_loudspeaker);
 
 
+        imgBackHome = (ImageView) findViewById(R.id.imgBackHome);
+        imgBackHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(DetailItemVoiceActivity.this, MainActivity.class);
+                startActivity(intent1);
+            }
+        });
+
+
+
         tvTime = (TextView) findViewById(R.id.tv_time);
 
         progressMusic = (ContentLoadingProgressBar) findViewById(R.id.progress_music);
@@ -62,20 +77,34 @@ public class DetailItemVoiceActivity extends AppCompatActivity {
 
             }
         });
+
         Log.e("TAG", "onCreate: "+intent.getStringExtra("image"));
         Glide.with(this).load(intent.getStringExtra("image")).into(imgAvata);
-        loop =switchLoop.isChecked();
+
         Log.e("Loop", "onCreate: "+loop);
         Log.e("TAG", "onCreate: đường dẫn voice"+intent.getStringExtra("sound") );
         playSound.startMusic(intent.getStringExtra("sound"));
         playSound.musicBar(progressMusic, tvTime);
-        if(switchLoop.isChecked()){
-            playSound.loop(loop);
-        }
+        switchLoop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                playSound.loop(b);
+            }
+        });
         imgLoudspeaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                boolean a = true;
+                if(a==true){
+                    playSound.Loudspeaker(a);
+                    imgLoudspeaker.setImageResource(R.drawable.mute);
+                    a=false;
+                }else if(a==false){
+                    playSound.Loudspeaker(a);
+                    imgLoudspeaker.setImageResource(R.drawable.loudspeaker_1);
+                    a=true;
+                }
             }
         });
 

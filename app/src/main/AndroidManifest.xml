@@ -23,6 +23,7 @@
             android:exported="false" />
         <activity
             android:name=".RecordActivity"
+            android:hardwareAccelerated="false"
             android:exported="false" />
         <activity
             android:name=".DetailItemVoiceActivity"
